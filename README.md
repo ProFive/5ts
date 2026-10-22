@@ -34,22 +34,25 @@ Nhận diện sử dụng logo PNG trong suốt do chủ website cung cấp và 
 
 Địa chỉ chi tiết trên Notion: 523A Do Xuan Hop Street, Phuoc Long Ward, Thu Duc City, Ho Chi Minh, Viet Nam. Theo yêu cầu của chủ website, phần liên hệ và dữ liệu có cấu trúc hiện ghi nhận TP. Hồ Chí Minh và Quảng Ngãi.
 
-## Deploy 5ts.io.vn
+## Deploy GitHub Pages với 5ts.io.vn
 
-Bản Sites đã được publish và hostname `5ts.io.vn` đã được đăng ký. Domain đang chờ cấu hình DNS và cấp chứng chỉ TLS. Tại nhà cung cấp DNS của `io.vn`, thêm đúng các bản ghi sau:
+Workflow `.github/workflows/pages.yml` deploy trực tiếp thư mục `dist/` sau mỗi lần push lên `main`. GitHub Pages được cấu hình với custom domain `5ts.io.vn`.
+
+Tại nhà cung cấp DNS, xóa hai bản ghi A cũ trỏ tới `162.159.143.30` và `172.66.3.26`, sau đó thêm bốn bản ghi A của GitHub Pages:
 
 | Loại | Tên | Giá trị |
 | --- | --- | --- |
-| A | `5ts.io.vn` (hoặc `@`) | `162.159.143.30` |
-| A | `5ts.io.vn` (hoặc `@`) | `172.66.3.26` |
-| TXT | `_openai-site-verification.5ts.io.vn` | `openai-site-verification=VA5PXbfhop3Gp2LUz_EMDcEhgqZyq5QzsEveuUdFh8A` |
-| TXT | `_cf-custom-hostname.5ts.io.vn` | `a2dba1ac-b61d-4f0f-b372-b0c246190270` |
+| A | `@` | `185.199.108.153` |
+| A | `@` | `185.199.109.153` |
+| A | `@` | `185.199.110.153` |
+| A | `@` | `185.199.111.153` |
+| CNAME | `www` | `profive.github.io` |
 
-Không thay đổi hoặc xóa các bản ghi MX/TXT email hiện có. Nếu giao diện DNS tự nối thêm tên zone, trường Name có thể chỉ cần `_openai-site-verification` và `_cf-custom-hostname`; kiểm tra phần preview của nhà cung cấp phải kết thúc bằng `.5ts.io.vn` đúng một lần.
+Không thay đổi hoặc xóa các bản ghi MX/TXT email hiện có. Sau khi chuyển hẳn khỏi Sites, có thể xóa hai TXT `_openai-site-verification` và `_cf-custom-hostname` vì GitHub Pages không dùng chúng. Không tạo bản ghi wildcard `*`.
 
-Sau khi DNS cập nhật, chờ trạng thái domain và SSL chuyển sang Active rồi kiểm tra HTTPS, `/en/`, `robots.txt` và `sitemap.xml`. Bản Sites hiện giới hạn cho chủ sở hữu; cần đổi access sang Public trước khi dùng làm website công ty cho khách truy cập.
+DNS có thể cần đến 24 giờ để cập nhật. Khi GitHub cấp chứng chỉ, bật **Enforce HTTPS** trong **Settings → Pages**, rồi kiểm tra `https://5ts.io.vn`, `/en/`, `robots.txt` và `sitemap.xml`.
 
-Canonical, hreflang, Open Graph và sitemap đã trỏ domain đích `https://5ts.io.vn`. Ảnh chia sẻ chỉ hoạt động tại URL này sau khi domain deploy thành công. Nếu chọn domain khác, cập nhật toàn bộ URL tuyệt đối trong hai file HTML và sitemap/robots. Bản preview riêng không dùng để đánh giá index SEO.
+Canonical, hreflang, Open Graph và sitemap đã trỏ domain đích `https://5ts.io.vn`. Nếu chọn domain khác, cập nhật toàn bộ URL tuyệt đối trong hai file HTML và sitemap/robots.
 
 ## Trước khi công bố rộng rãi
 
