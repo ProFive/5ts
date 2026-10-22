@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://5ts.io.vn/sitemap.xml
